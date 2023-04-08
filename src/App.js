@@ -36,6 +36,13 @@ function App() {
     setId('');
   }
 
+  //delete booking from LS
+  const deleteBook = (id) => {
+    const folteredBooking = books.filter((element, index) => {
+      return element.id !== id
+    })
+    setbooks(folteredBooking);
+  }
   // useEffect saving data
   useEffect(() => {
     localStorage.setItem('book', JSON.stringify(books));
@@ -74,9 +81,11 @@ function App() {
                   </tr>
                 </thead>
                 <tbody>
-                  <View books={books}></View>
+                  <View books={books} deleteBook={deleteBook}></View>
                 </tbody>
               </table>
+              <button className='btn btn-danger btn-md'
+                onClick={() => setbooks([])}>Remove all</button>
             </div>
           </>}
           {books.length < 1 && <div>No Number added yet</div>}
